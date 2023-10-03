@@ -1,0 +1,27 @@
+[package]
+name = "mach-cli"
+version = "0.1.0"
+edition = "2021"
+description = "A CLI for `mozilla-central` contributors that finds the right `mach` entry point for you, even if you're in a subdirectory."
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ErichDonGubler/mach-cli"
+
+[dependencies]
+anyhow = "1.0.75"
+env_logger = "0.10.0"
+ezcmd = "0.2.0"
+lets_find_up = "0.0.3"
+log = "0.4.20"
+
+# The profile that `cargo dist` will build with
+[profile.dist]
+inherits = "release"
+lto = "thin"
+
+# Config for `cargo dist`
+[workspace.metadata.dist]
+cargo-dist-version = "0.0.7"
+rust-toolchain-version = "1.67.1"
+ci = ["github"]
+installers = ["shell", "powershell"]
+targets = ["x86_64-unknown-linux-gnu", "x86_64-apple-darwin", "x86_64-pc-windows-msvc", "aarch64-apple-darwin"]
